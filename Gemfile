@@ -9,9 +9,12 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
-gem 'activerecord-postgis-adapter'
+gem 'activerecord-postgis-adapter', "3.0.0.beta1"
 gem 'haml'
-gem "haml-rails"
+gem 'haml-rails'
+gem "therubyracer"
+gem "less-rails"
+gem "twitter-bootstrap-rails"
 
 group :development, :test do
   gem 'byebug'
