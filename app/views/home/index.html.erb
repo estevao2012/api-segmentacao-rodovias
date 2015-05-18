@@ -1,9 +1,7 @@
-<%#= @json_edu["10"]["features"][0]["properties"] %>
 <div id="map" class="map"></div>
 <div id="information" class="information"></div>
-
-
 <script type="text/javascript">
+
 var base_layer = new ol.layer.Tile({ source: new ol.source.MapQuest({layer: 'osm'})})
 var centeroid = ol.proj.transform([-47.1384275, -12.1923535], 'EPSG:4326', 'EPSG:3857');
 var viewOverall = new ol.View({
@@ -11,30 +9,8 @@ var viewOverall = new ol.View({
     zoom: 5
 });
 
-
-var vector = [base_layer];
-<% @json_edu.each_key do |key, json_edu| %>
-var item = new ol.layer.Vector({
-   style: new ol.style.Style({
-      stroke: new ol.style.Stroke({
-        color: "#<%= random_color%>",
-        width: 5
-      }),
-      fill: new ol.style.Fill({
-        color: 'rgba(0, 0, 255, 0.1)'
-      })
-    }),
-  source: new ol.source.GeoJSON({
-    projection: 'EPSG:3857',
-    object: <%= raw @json_edu[key].to_json %>
-  }),
-});
-
-vector.push(item);
-<% end %>
-
 var map = new ol.Map({
-  layers: vector,
+  layers: [base_layer],
   target: 'map',
   view: viewOverall
 });
@@ -64,17 +40,34 @@ var displayFeatureInfo = function(pixel) {
   } else {
     info.innerHTML = '&nbsp;';
   }
-
-  // if (feature !== highlight) {
-  //   if (highlight) {
-  //     featureOverlay.removeFeature(highlight);
-  //   }
-  //   if (feature) {
-  //     featureOverlay.addFeature(feature);
-  //   }
-  //   highlight = feature;
-  // }
 }
 
+function createVector(color, object){
+  var item = new ol.layer.Vector({
+     style: new ol.style.Style({
+        stroke: new ol.style.Stroke({
+          color: color,
+          width: 5
+        }),
+        fill: new ol.style.Fill({
+          color: 'rgba(0, 0, 255, 0.1)'
+        })
+      }),
+    source: new ol.source.GeoJSON({
+      projection: 'EPSG:3857',
+      object: object
+    }),
+  });
+  return item;
+}
+
+$(function(){
+  <% @locals.each do |single| %>
+    $.get("<%= get_geom_path(single.br) %>", function(data){
+      var item = createVector("#<%= random_color %>", data);
+      map.addLayer(item);
+    });
+  <% end %>
+})
 
 </script>

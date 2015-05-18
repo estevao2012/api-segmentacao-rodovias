@@ -1,20 +1,24 @@
 class HomeController < ApplicationController
 	def index
+		@locals   = Rodovia.all.group(:br).select(:br)
+	end
+
+	def get_geom_by_br 
+		br = params[:br]
+
 		factory  	= RGeo::GeoJSON::EntityFactory.instance
 		@features = {}
 		@json_edu = {}
+		
+		locals     = Rodovia.find_by_sql("SELECT ST_Union(\"rodovias\".\"geom\") as \"geom\", \"rodovias\".\"br\" FROM \"rodovias\" WHERE \"rodovias\".\"br\" = '"+ br +"' GROUP BY br") 
 
-		# locals   = Rodovia.all.limit(300).group([:br, :geom, :id])
-		locals     = Rodovia.find_by_sql('SELECT ST_Union("rodovias"."geom") as "geom", "rodovias"."br" FROM "rodovias" GROUP BY br LIMIT 30')
+		single = locals.first
+		feature = factory.feature(single.geom, single.br, {br: single.br})
 
-		locals.each do |single|
-		  feature = factory.feature(single.geom, single.br, {br: single.br})
-		  @features[single.br] = Array.new if @features[single.br].nil?
-		  @features[single.br] << feature
-		end
+		@json_edu = RGeo::GeoJSON.encode feature
 
-		@features.each_key do |key, feature|
-			@json_edu[key] = RGeo::GeoJSON.encode factory.feature_collection(@features[key])
+		respond_to do |format|
+		  format.json  { render json: @json_edu.to_json }
 		end
 	end
 end
