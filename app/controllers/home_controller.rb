@@ -4,9 +4,11 @@ class HomeController < ApplicationController
 		@features = {}
 		@json_edu = {}
 
-		locals   = Rodovia.all.limit(100).order(:br)
+		# locals   = Rodovia.all.limit(300).group([:br, :geom, :id])
+		locals     = Rodovia.find_by_sql('SELECT ST_Union("rodovias"."geom") as "geom", "rodovias"."br" FROM "rodovias" GROUP BY br LIMIT 30')
+
 		locals.each do |single|
-		  feature = factory.feature(single.geom, single.id, {br: single.br, uf: single.uf})
+		  feature = factory.feature(single.geom, single.br, {br: single.br})
 		  @features[single.br] = Array.new if @features[single.br].nil?
 		  @features[single.br] << feature
 		end

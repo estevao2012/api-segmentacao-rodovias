@@ -10,34 +10,34 @@ var viewOverall = new ol.View({
     center: centeroid,
     zoom: 5
 });
+
+
+var vector = [base_layer];
+<% @json_edu.each_key do |key, json_edu| %>
+var item = new ol.layer.Vector({
+   style: new ol.style.Style({
+      stroke: new ol.style.Stroke({
+        color: "#<%= random_color%>",
+        width: 5
+      }),
+      fill: new ol.style.Fill({
+        color: 'rgba(0, 0, 255, 0.1)'
+      })
+    }),
+  source: new ol.source.GeoJSON({
+    projection: 'EPSG:3857',
+    object: <%= raw @json_edu[key].to_json %>
+  }),
+});
+
+vector.push(item);
+<% end %>
+
 var map = new ol.Map({
-  layers: [base_layer],
+  layers: vector,
   target: 'map',
   view: viewOverall
 });
-
-<% @json_edu.each_key do |key, json_edu| %>
-  var vector = new ol.layer.Vector({
-     style: new ol.style.Style({
-        stroke: new ol.style.Stroke({
-          color: "#<%= random_color%>",
-          width: 5
-        }),
-        fill: new ol.style.Fill({
-          color: 'rgba(0, 0, 255, 0.1)'
-        })
-      }),
-    source: new ol.source.GeoJSON({
-      projection: 'EPSG:3857',
-      object: <%= raw @json_edu[key].to_json %>
-    }),
-   
-  })
-  vector.on('click', function(){
-    console.log("oppaaa");
-  })
-  map.addLayer(vector);
-<% end %>
 
 map.getViewport().addEventListener("click", function(e) {
   displayFeatureInfo(map.getEventPixel(e));
@@ -47,13 +47,14 @@ map.addInteraction(new ol.interaction.Select({
   condition: ol.events.condition.mouseMove
 }));
 
-var displayFeatureInfo = function(pixel ) {
+var displayFeatureInfo = function(pixel) {
   var feature = map.forEachFeatureAtPixel(pixel, function(feature, layer) {
     console.log(feature);
     return feature;
-    });
+  });
 
   var info = document.getElementById('information');
+  
   if (feature) {
     info.innerHTML =  '<div class="panel panel-info"><div class="panel-heading"><h3 class="panel-title">' + feature.get('br') +
      '</h3></div><div class="panel-body">' + '<dt>API: </dt><dd class="text-info">' + feature.get('API') + '</dd>'
@@ -64,17 +65,16 @@ var displayFeatureInfo = function(pixel ) {
     info.innerHTML = '&nbsp;';
   }
 
-  if (feature !== highlight) {
-    if (highlight) {
-      featureOverlay.removeFeature(highlight);
-    }
-    if (feature) {
-      featureOverlay.addFeature(feature);
-    }
-    highlight = feature;
-  }
-
-}; 
+  // if (feature !== highlight) {
+  //   if (highlight) {
+  //     featureOverlay.removeFeature(highlight);
+  //   }
+  //   if (feature) {
+  //     featureOverlay.addFeature(feature);
+  //   }
+  //   highlight = feature;
+  // }
+}
 
 
 </script>
