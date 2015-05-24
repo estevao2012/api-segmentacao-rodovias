@@ -16,50 +16,13 @@ var map = new ol.Map({
 });
 
 map.getViewport().addEventListener("click", function(e) {
-  displayFeatureInfo(map.getEventPixel(e));
+  displayFeatureInfo(map, map.getEventPixel(e));
 });
 
 map.addInteraction(new ol.interaction.Select({
   condition: ol.events.condition.mouseMove
 }));
 
-var displayFeatureInfo = function(pixel) {
-  var feature = map.forEachFeatureAtPixel(pixel, function(feature, layer) {
-    console.log(feature);
-    return feature;
-  });
-
-  var info = document.getElementById('information');
-  
-  if (feature) {
-    info.innerHTML =  '<div class="panel panel-info"><div class="panel-heading"><h3 class="panel-title">' + feature.get('br') +
-     '</h3></div><div class="panel-body">' + '<dt>API: </dt><dd class="text-info">' + feature.get('API') + '</dd>'
-     + '<dt>Status: </dt><dd class="text-info">' + feature.get('Status') +  '</dd>' +
-     '<dt>Legal : </dt><dd class="text-info">' + feature.get('Legal') +  '</dd>' +
-     '<dt>Site Name: </dt><dd class="text-info">' + feature.get('Site_Name') +  '</dd>'+'</div>';
-  } else {
-    info.innerHTML = '&nbsp;';
-  }
-}
-
-function createVector(color, object){
-  var item = new ol.layer.Vector({
-     style: new ol.style.Style({
-        stroke: new ol.style.Stroke({
-          color: color,
-          width: 5
-        }),
-        fill: new ol.style.Fill({
-          color: 'rgba(0, 0, 255, 0.1)'
-        })
-      }),
-    source: new ol.source.GeoJSON({
-      projection: 'EPSG:3857',
-      object: object
-    }),
-  });
-  return item;
-}
 
 $(function(){
   <% @locals.each do |single| %>

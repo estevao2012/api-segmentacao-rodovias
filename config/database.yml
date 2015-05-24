@@ -5,10 +5,10 @@ default: &default
   postgis_extension: postgis      
   schema_search_path: "public,postgis"
   pool: 5
-  username: root           
-  password: root
-  su_username: root     # a superuser for the database
-  su_password: root  # the superuser's password
+  username: estevao           
+  password: estevao
+  su_username: estevao     # a superuser for the database
+  su_password: estevao  # the superuser's password
 
 development:
   <<: *default

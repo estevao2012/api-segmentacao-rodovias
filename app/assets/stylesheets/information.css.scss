@@ -1,0 +1,74 @@
+
+
+.information{
+	position: fixed;
+	right: 1%; 
+	height: 96%;
+	width: 25%;
+	min-height: 200px;
+	min-width: 470px;
+	background: white;
+	z-index: 10000000000000;
+	top: 2%;
+	border-radius: 10px;
+	.panel.panel-info {
+	  	height: 100%;
+	  	.panel-header{
+	  		height: 6%;
+	  	}
+			.panel-body{
+				height: 94%;
+			}
+	}
+
+	.rodovia{
+		width: 50%;
+		height: 100%;
+		display: inline-block;
+		.segmentos{
+			overflow: hidden;
+			height: 100%;
+			.item-segmento{
+				width: 100%;
+				display: table;
+
+				.placa-km{
+					width: 32%;
+					display: block;
+					float: left;
+					min-height: 30px;
+
+				}
+				.segmento{
+					width: 30%;
+					display: block;
+					float: left;
+					background: #666;
+					min-height: 30px;
+					span{
+						width: 14%;
+						background: yellow;
+						height: 15px;
+						display: block;
+						margin: 8px auto 0;
+					}
+					&:hover{
+						background: green;
+					}
+				}
+				.principal-referencia{
+					width: 32%;
+					display: block;
+					float: left;
+					min-height: 30px;
+				}
+			}
+		}
+	}
+	.infomacao-rodovia{
+		width: 50%;
+		height: 100%;
+		display: inline-block;
+		float: right;
+	}
+}
