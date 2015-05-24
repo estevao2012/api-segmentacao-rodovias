@@ -3,30 +3,30 @@
 		<h3 class="panel-title">BR <%= @rodovia.first.br %></h3>
 	</div>
 	<div class="panel-body">
+		
 		<div class="rodovia">
 			<div class="segmentos">
-				<% @rodovia.each do |single| %>
+				<% @rodovia.each do |segmento| %>
 					<div class="item-segmento">
-						<div class="placa-km"><%= "Estado #{single.uf}"%></div>
-						<div class="segmento" data-id="<%= single.id %>">
+						<div class="placa-km"><%= "#{segmento.uf}"%></div>
+						<div class="segmento" data-id="<%= segmento.id %>">
 							<span></span>
 						</div>
 						<div class="principal-referencia"></div>
+						<div class="informations" style="display: none">
+							<%= render partial: 'segmento' , object: segmento %>
+						</div>
 					</div>
 				<% end %>
 			</div>
 		</div>
-		<div class="infomacao-rodovia"></div>	
+		<div class="infomacao-rodovia"></div>
+
 	</div>
 </div>
 <script>
 	
 $(function(){
   $('.segmentos').kinetic();
-  $(".segmento").click(function(){
-  	$.get("/segmento/" + $(this).data('id'), function(data){
-  		$(".infomacao-rodovia").html(data);
-  	})
-  })
 })
 </script>

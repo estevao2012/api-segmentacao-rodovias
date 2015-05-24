@@ -1,5 +1,6 @@
 <div id="map" class="map"></div>
 <div id="information" class="information"></div>
+
 <script type="text/javascript">
 
 var base_layer = new ol.layer.Tile({ source: new ol.source.MapQuest({layer: 'osm'})})
@@ -31,6 +32,13 @@ $(function(){
       map.addLayer(item);
     });
   <% end %>
+
+
+  $(document).on('click', ".segmento", function(){
+    $info = $(this).closest(".item-segmento").find('.informations');
+    $info.show();
+    $(".infomacao-rodovia").html($info);
+  })
 })
 
 </script>

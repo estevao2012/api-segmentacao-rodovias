@@ -20,13 +20,8 @@ class HomeController < ApplicationController
 
 	def rodovia
 		br = params[:br]
-		@rodovia = Rodovia.where( br: br).order(:geom)
+		@rodovia = Rodovia.where( br: br).order(:geom, :uf)
 		render layout: false
-	end
-
-	def segmento
-		id = params[:id]
-		@segmento = Rodovia.find(id)
 	end
 
 end

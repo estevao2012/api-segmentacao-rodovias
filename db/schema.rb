@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150420172255) do
+ActiveRecord::Schema.define(version: 20150524172502) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,23 @@ ActiveRecord::Schema.define(version: 20150420172255) do
     t.geometry "geom",       limit: {:srid=>4676, :type=>"multi_line_string"}
     t.datetime "created_at",                                                                 null: false
     t.datetime "updated_at",                                                                 null: false
+  end
+
+  create_table "via_caracteristic_categorys", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.integer  "importance"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "via_caracteristics", force: :cascade do |t|
+    t.string    "name"
+    t.string    "description"
+    t.integer   "via_caracteristic_categorys_id"
+    t.geography "geom",                           limit: {:srid=>4326, :type=>"point", :geographic=>true}
+    t.datetime  "created_at",                                                                              null: false
+    t.datetime  "updated_at",                                                                              null: false
   end
 
 end
