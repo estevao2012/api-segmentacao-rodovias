@@ -16,6 +16,7 @@ gem "therubyracer"
 gem "less-rails"
 gem "twitter-bootstrap-rails"
 gem 'rgeo-geojson'
+gem "font-awesome-rails"
 
 group :development, :test do
   gem 'byebug'

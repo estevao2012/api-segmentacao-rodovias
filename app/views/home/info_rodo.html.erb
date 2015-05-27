@@ -1,0 +1,25 @@
+<div class="panel panel-info">
+  <div class="panel-heading">
+    <h3 class="panel-title"><%= "BR #{@br}: Extensão #{@sum_extensao}Km"%></h3>
+  </div>
+  <div class="panel-body">
+    <div class="mapa-rodovia">
+      <div class="up-more"></div>
+      <div class="down-more"></div>
+      <% @segmento_rodovias.each do |seg_rod| %>
+      <div class="data-segmento-rodovia">
+        <div class="estado" ><%= seg_rod.uf %></div>
+        <div class="segmento-rodovia">
+          <div class="stripe"></div>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<script>
+  $('.mapa-rodovia').kinetic({});
+  $(".segmento-rodovia").click(function(){
+    console.log("AKI");
+  })
+</script>
