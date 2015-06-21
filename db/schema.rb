@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150524172502) do
+ActiveRecord::Schema.define(version: 20150621010022) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,29 @@ ActiveRecord::Schema.define(version: 20150524172502) do
     t.datetime "updated_at",                                                                 null: false
   end
 
+  create_table "rodovias_raw", primary_key: "gid", force: :cascade do |t|
+    t.decimal  "id",                                                        precision: 10
+    t.string   "br"
+    t.string   "uf"
+    t.string   "codigo"
+    t.string   "local_de_i"
+    t.string   "local_de_f"
+    t.decimal  "km_inicial"
+    t.decimal  "km_final"
+    t.float    "extensao"
+    t.string   "superficie"
+    t.string   "federal_co"
+    t.string   "federal__1"
+    t.string   "federal__2"
+    t.string   "estadual_c"
+    t.string   "superfic_1"
+    t.string   "mpv_082_20"
+    t.string   "concessao_"
+    t.geometry "geom",       limit: {:srid=>0, :type=>"multi_line_string"}
+  end
+
+  add_index "rodovias_raw", ["geom"], name: "rodovias_raw_geom_gist", using: :gist
+
   create_table "via_caracteristic_categorys", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
@@ -54,6 +77,9 @@ ActiveRecord::Schema.define(version: 20150524172502) do
     t.geography "geom",                           limit: {:srid=>4326, :type=>"point", :geographic=>true}
     t.datetime  "created_at",                                                                              null: false
     t.datetime  "updated_at",                                                                              null: false
+    t.integer   "rodovia_id"
   end
+
+  add_index "via_caracteristics", ["rodovia_id"], name: "index_via_caracteristics_on_rodovia_id", using: :btree
 
 end

@@ -1,7 +1,10 @@
+var pointLayer;
+
 function displayFeatureInfo(map, pixel) {
   var feature = map.forEachFeatureAtPixel(pixel, function(feature, layer) {
     return feature;
   });
+
 
   
   if (feature) {
@@ -9,6 +12,22 @@ function displayFeatureInfo(map, pixel) {
       $("#information").html(data);
     });
   }else{
+    var position = map.getCoordinateFromPixel(pixel);
+
+    map.removeLayer(pointLayer);
+
+    var pointFeature = new ol.Feature({
+      geometry: new ol.geom.Point(position),
+      name: "Location Marker"
+    });
+
+    pointLayer = new ol.layer.Vector({
+        source: new ol.source.Vector({
+            features: [pointFeature]
+        })
+    });
+
+    map.addLayer(pointLayer);
   }
 }
 
