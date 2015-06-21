@@ -1,26 +1,18 @@
 class HomeController < ApplicationController
 	def index
-		@locals   = Rodovia.all.group(:br).select(:br).limit(5)
+		@locals   = Rodovia.all.limit(2)
 	end
 
 	def get_geom_by_br 
 		br = params[:br]
 
 		factory = RGeo::GeoJSON::EntityFactory.instance
-		single  = RodoviasSelector.first_by_br(br).first
-		feature = factory.feature(single.geom, single.br, {br: single.br})
+		single  = Rodovia.find_by br: br
+		feature = factory.feature(single.geom, single.br, {br: single.br, id: single.id})
 		json_edu = RGeo::GeoJSON.encode feature
 
 		respond_to do |format|
 		  format.json  { render json: json_edu.to_json }
 		end
 	end
-
-	def rodovia
-		br = params[:br]
-		@rodovia = Rodovia.where( br: br).order(:geom, :uf)
-		render layout: false
-	end
-
-
 end

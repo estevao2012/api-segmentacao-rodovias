@@ -5,32 +5,29 @@ function displayFeatureInfo(map, pixel) {
     return feature;
   });
 
-
-  
   if (feature) {
-    $.get("/rodovia/" + feature.get("br"), function(data){
+    $.get("/rodovias/" + feature.get("id"), function(data){
       $("#information").html(data);
     });
   }else{
-    var position = map.getCoordinateFromPixel(pixel);
-    var point    = new ol.geom.Point(position);
     map.removeLayer(pointLayer);
 
+    var position     = map.getCoordinateFromPixel(pixel);
+    var point        = new ol.geom.Point(position);
     var pointFeature = new ol.Feature({
       geometry: point,
       name: "Location Marker"
     });
 
     pointLayer = new ol.layer.Vector({
-        source: new ol.source.Vector({
-            features: [pointFeature]
-        })
+      source: new ol.source.Vector({ features: [pointFeature] })
     });
+    
     npoint = point.clone().transform('EPSG:3857', 'EPSG:4326');
+    coord  = npoint.getCoordinates();
 
-    console.log(point.getCoordinates());
-    console.log(npoint.getCoordinates());
-    $(".input_coordenadas").val(position);
+    $(".coord-x-form").val(coord[0]);
+    $(".coord-y-form").val(coord[1]);
 
     map.addLayer(pointLayer);
   }
