@@ -6,11 +6,9 @@ class HomeController < ApplicationController
 	def get_geom_by_br 
 		br = params[:br]
 
-		factory  	= RGeo::GeoJSON::EntityFactory.instance
-		
-		single    = RodoviasSelector.first_by_br(br).first
+		factory = RGeo::GeoJSON::EntityFactory.instance
+		single  = RodoviasSelector.first_by_br(br).first
 		feature = factory.feature(single.geom, single.br, {br: single.br})
-
 		json_edu = RGeo::GeoJSON.encode feature
 
 		respond_to do |format|
@@ -23,5 +21,6 @@ class HomeController < ApplicationController
 		@rodovia = Rodovia.where( br: br).order(:geom, :uf)
 		render layout: false
 	end
+
 
 end

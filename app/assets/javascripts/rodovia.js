@@ -13,11 +13,11 @@ function displayFeatureInfo(map, pixel) {
     });
   }else{
     var position = map.getCoordinateFromPixel(pixel);
-
+    var point    = new ol.geom.Point(position);
     map.removeLayer(pointLayer);
 
     var pointFeature = new ol.Feature({
-      geometry: new ol.geom.Point(position),
+      geometry: point,
       name: "Location Marker"
     });
 
@@ -26,6 +26,11 @@ function displayFeatureInfo(map, pixel) {
             features: [pointFeature]
         })
     });
+    npoint = point.clone().transform('EPSG:3857', 'EPSG:4326');
+
+    console.log(point.getCoordinates());
+    console.log(npoint.getCoordinates());
+    $(".input_coordenadas").val(position);
 
     map.addLayer(pointLayer);
   }
