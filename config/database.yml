@@ -20,5 +20,7 @@ test:
 production:
   <<: *default
   database: segmentacao-rodovias_production
-  username: segmentacao-rodovias
-  password: <%= ENV['SEGMENTACAO-RODOVIAS_DATABASE_PASSWORD'] %>
+  username: postgres
+  password: postgres
+  su_username: postgres     # a superuser for the database
+  su_password: postgres  # the superuser's password
