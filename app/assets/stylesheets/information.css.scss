@@ -28,36 +28,61 @@
 		.segmentos{
 			overflow: hidden;
 			height: 100%;
+			background: image-url("bg_segmentos.png") repeat-y center center;
 			.item-segmento{
 				width: 100%;
 				display: table;
+				position: relative;
 
-				.placa-km{
-					width: 32%;
+				.categoria{
+					width: 35%;
 					display: block;
 					float: left;
-					min-height: 30px;
+					min-height: 40px;
+					margin-bottom: 10px;
+					span{
+						display: block;
+						float:right;
+						&.cat-image{
+							border: 4px solid black;
+							width: 40px;
+							height: 40px;
+							background: white;
+						}
+						&.arrow{
+							display: block;
+							  float: right;
+							  width: 0;
+							  height: 0;
+							  border-top: 10px solid transparent;
+							  border-bottom: 10px solid transparent;
+							  border-right: 10px solid transparent;
+							  border-left: 10px solid black;
+							  margin-top: 10px;
+							  margin-right: -14px;
+						}
+
+					}
 
 				}
 				.segmento{
 					width: 30%;
 					display: block;
 					float: left;
-					background: #666;
-					min-height: 30px;
+					min-height: 40px;
+						margin-bottom: 10px;
 					span{
-						width: 14%;
-						background: yellow;
-						height: 15px;
+						width: 40px;
+						border: 7px solid black;
+						border-radius: 100%;
 						display: block;
-						margin: 8px auto 0;
-					}
-					&:hover{
-						background: green;
+						height: 40px;
+						margin: auto;
+						background-color: white;
 					}
 				}
 				.principal-referencia{
-					width: 32%;
+					width: 35%;
 					display: block;
 					float: left;
 					min-height: 30px;

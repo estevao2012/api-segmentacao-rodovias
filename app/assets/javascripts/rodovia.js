@@ -51,3 +51,13 @@ function createVector(color, object){
   });
   return item;
 }
+
+function createPoint(color, object){
+  var item = new ol.layer.Vector({
+    source: new ol.source.GeoJSON({
+      projection: 'EPSG:3857',
+      object: object
+    }),
+  });
+  return item;
+}

@@ -19,11 +19,13 @@
     </div>
     <div class="form-group">
       <!-- <label for="exampleInputEmail1">Nome</label> -->
-      <%= f.select :via_caracteristic_category, ViaCaracteristicCategory.all, prompt: "Categoria", html: { class: "form-control"} %>
+      <%= f.select :via_caracteristic_category, ViaCaracteristicCategory.all.collect{|e| [e.name,e.id ]}, {prompt: "Categoria"}, { class: "form-control"} %>
     </div>
     
-      <%= f.hidden_field :coord_x, class: "coord-x-form" %>
-      <%= f.hidden_field :coord_y, class: "coord-y-form" %>      
+    <div class="form-group">
+      Coord X: <%= f.text_field :coord_x, class: "coord-x-form form-control", readonly: true %>
+      Coord Y: <%= f.text_field :coord_y, class: "coord-y-form form-control", readonly: true %>   
+      </div>   
   </div>
 
   <div class="actions">

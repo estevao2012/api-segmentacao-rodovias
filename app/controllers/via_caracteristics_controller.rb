@@ -9,6 +9,7 @@ class ViaCaracteristicsController < ApplicationController
 	def create
 		@via_caracteristic 				 = ViaCaracteristic.new(via_caracteristic_params)
 		@via_caracteristic.rodovia = @rodovia
+		@via_caracteristic.generate_geom
 		@via_caracteristic.save
 	end
 
@@ -20,7 +21,7 @@ class ViaCaracteristicsController < ApplicationController
 		end
 
 		def via_caracteristic_params
-			params.require(:via_caracteristic).permit(:name, :description, :coord_y, :coord_y, :via_caracteristic_categorys, :rodovia_id)
+			params.require(:via_caracteristic).permit(:name, :description, :coord_y, :coord_y, :via_caracteristic_categorys, :rodovia_id, :coord_x)
 		end
 	
 end

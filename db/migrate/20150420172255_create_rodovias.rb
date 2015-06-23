@@ -17,7 +17,7 @@ class CreateRodovias < ActiveRecord::Migration
     	t.string :superfic_1
     	t.string :mpv_082_20
     	t.string :concessao_
-    	t.multi_line_string :geom, srid: 4676
+    	t.multi_line_string :geom
       t.timestamps null: false
     end
   end

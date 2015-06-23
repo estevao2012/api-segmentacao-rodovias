@@ -5,10 +5,29 @@ class ViaCaracteristic < ActiveRecord::Base
 
 	attr_accessor :coord_y, :coord_x
 
-	before_save :generate_geom
-
 	def generate_geom
-		self.geom = RGeo::Geographic.spherical_factory(:srid => 4326).point(self.coord_x,self.coord_y)
+		if self.coord_x && self.coord_y
+			self.geom = RGeo::Geographic.spherical_factory(:srid => 4326).point(self.coord_x,self.coord_y)
+			sql = "SELECT ST_AsText(ST_ClosestPoint(
+						    ST_GeomFromText('#{self.rodovia.geom}'),
+						    ST_GeomFromText('#{self.geom}')
+						));"
+			result = ActiveRecord::Base.connection.execute(sql)
+			result.each do |row|
+				self.geom = row["st_astext"]
+			end
+
+			sql = "SELECT ST_line_locate_point(
+						    ST_LineMerge(ST_GeomFromText('#{self.rodovia.geom}')),
+						    ST_GeomFromText('#{self.geom}')
+						);"
+			result = ActiveRecord::Base.connection.execute(sql)
+			result.each do |row|
+				self.distance = row["st_line_locate_point"]
+			end
+			
+		end
+
 	end
 
 end

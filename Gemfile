@@ -18,6 +18,9 @@ gem "twitter-bootstrap-rails"
 gem 'rgeo-geojson'
 gem 'capistrano',  '~> 3.1'
 gem 'capistrano-rails', '~> 1.1'
+gem "paperclip", "~> 4.2"
+gem 'rails_admin', '~> 0.6.8'
+gem 'devise'
 
 group :development, :test do
   gem 'byebug'

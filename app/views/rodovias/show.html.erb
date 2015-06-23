@@ -7,10 +7,9 @@
 		
 		<div class="rodovia">
 			<div class="segmentos">
-				<span class="linha-segmentos"></span>
-				<%# @rodovias.each do |segmento| %>
-					<%#= render partial: 'segmento' , object: segmento %>
-				<%# end %>
+				<% @rodovia.via_caracteristics.each do |segmento| %>
+					<%= render partial: 'segmento' , object: segmento %>
+				<% end %>
 			</div>
 		</div>
 
