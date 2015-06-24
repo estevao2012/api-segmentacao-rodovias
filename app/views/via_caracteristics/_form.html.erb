@@ -1,3 +1,4 @@
+<p> Clique no mapa a localização aproximada da marcação. Evite clicar sobre a linha da rodovia , clique na lateral para determinar o ponto por proximidade. </p>
 <%= form_for([@rodovia, @via_caracteristic], url: {action: "create"} , remote: true, method: :post) do |f| %>
   <% if @via_caracteristic.errors.any? %>
     <div id="error_explanation">
@@ -19,7 +20,7 @@
     </div>
     <div class="form-group">
       <!-- <label for="exampleInputEmail1">Nome</label> -->
-      <%= f.select :via_caracteristic_category, ViaCaracteristicCategory.all.collect{|e| [e.name,e.id ]}, {prompt: "Categoria"}, { class: "form-control"} %>
+      <%= select_tag "via_caracteristic[via_caracteristic_categorys_id]", options_from_collection_for_select(ViaCaracteristicCategory.all, :id, :name), {prompt: "Categoria", class: "form-control"} %>
     </div>
     
     <div class="form-group">

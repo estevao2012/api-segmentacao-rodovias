@@ -43,8 +43,9 @@ $(function(){
 
   $(document).on('click', ".segmento", function(){
     $info = $(this).closest(".item-segmento").find('.informations');
-    $info.show();
-    $(".infomacao-rodovia").html($info);
+    $(".adicionar-categoria").hide();
+    $(".infomacao-rodovia").html($info.html());
+    $(".infomacao-rodovia").show();
   })
 })
 

@@ -21,7 +21,7 @@ class ViaCaracteristicsController < ApplicationController
 		end
 
 		def via_caracteristic_params
-			params.require(:via_caracteristic).permit(:name, :description, :coord_y, :coord_y, :via_caracteristic_categorys, :rodovia_id, :coord_x)
+			params.require(:via_caracteristic).permit(:name, :description, :coord_y, :coord_y, :via_caracteristic_categorys_id, :rodovia_id, :coord_x)
 		end
 	
 end

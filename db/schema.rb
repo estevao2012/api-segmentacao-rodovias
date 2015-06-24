@@ -101,6 +101,7 @@ ActiveRecord::Schema.define(version: 20150623234202) do
     t.datetime  "updated_at",                                                                              null: false
     t.integer   "rodovia_id"
     t.float     "distance"
+    t.float     "km"
   end
 
   add_index "via_caracteristics", ["rodovia_id"], name: "index_via_caracteristics_on_rodovia_id", using: :btree
