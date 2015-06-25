@@ -28,7 +28,7 @@ class ViaCaracteristic < ActiveRecord::Base
 			row 					= result.first
 		  self.distance = row["st_line_locate_point"]
 
-			sql 		= "SELECT ST_Length('#{self.rodovia.geom}') AS km_roads;"
+			sql 		= "SELECT ST_Length(cast(ST_GeomFromText('#{self.rodovia.geom}') as geography))/1000 AS km_roads;"
 			result  = ActiveRecord::Base.connection.execute(sql)
 
 			row 		= result.first

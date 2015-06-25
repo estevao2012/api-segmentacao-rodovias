@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
 	def index
-		@locals   = Rodovia.all.limit(5)
+		@locals   = Rodovia.all #.limit(5)
 		@caracteristics = ViaCaracteristic.all
 	end
 
