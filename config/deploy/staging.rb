@@ -9,7 +9,7 @@ set :server_name, "segmentacao_rodovias"
 # set :nginx_server_name, 'api-staging.minhacorridaapp.com.br'
 set :deploy_user, 'ubuntu'
 
-server '52.7.23.20', user: 'ubuntu', roles: %w{web app db}, primary: true
+server '54.175.242.190', user: 'ubuntu', roles: %w{web app db}, primary: true
 
 set :deploy_to, "/home/#{fetch(:deploy_user)}/#{fetch(:full_app_name)}"
 
