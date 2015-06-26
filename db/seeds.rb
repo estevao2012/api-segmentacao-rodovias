@@ -19,10 +19,13 @@ ViaCaracteristicCategory.find_or_create_by name: "Outra Caracteristica", importa
 ViaCaracteristicCategory.find_or_create_by name: "Redutor de Velocidade", importance: 0
 ViaCaracteristicCategory.find_or_create_by name: "Inicio: Capacidade Máxima de Carga", importance: 0
 ViaCaracteristicCategory.find_or_create_by name: "Fim: Capacidade Máxima de Carga", importance: 0
-ViaCaracteristicCategory.find_or_create_by name: "Velocidades Máxima ", importance: 0
-ViaCaracteristicCategory.find_or_create_by name: "Acostamento ", importance: 0
+ViaCaracteristicCategory.find_or_create_by name: "Velocidades Máxima", importance: 0
+ViaCaracteristicCategory.find_or_create_by name: "Acostamento", importance: 0
+ViaCaracteristicCategory.find_or_create_by name: "Cidade", importance: 0
+ViaCaracteristicCategory.find_or_create_by name: "Entroncamento", importance: 0
 
-User.create!({:email => "admin@admin.com", :password => "12345678", :password_confirmation => "12345678" })
+
+User.create!({:email => "admin@admin.com", :password => "12345678", :password_confirmation => "12345678" }) unless User.find_by email: "admin@admin.com"
 
 
 

@@ -61,3 +61,9 @@ function createPoint(color, object){
   });
   return item;
 }
+
+$(function(){
+  $(document).on('submit', "#new_via_caracteristic", function(){
+    $(".hide-success").show();
+  })
+})

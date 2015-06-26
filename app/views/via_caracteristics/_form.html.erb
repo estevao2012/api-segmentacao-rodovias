@@ -1,3 +1,6 @@
+
+<div class="alert alert-success hide-success" role="alert">Estamos enviando, aguarde!</div>
+
 <p> Clique no mapa a localização aproximada da marcação. Evite clicar sobre a linha da rodovia , clique na lateral para determinar o ponto por proximidade. </p>
 <%= form_for([@rodovia, @via_caracteristic], url: {action: "create"} , remote: true, method: :post) do |f| %>
   <% if @via_caracteristic.errors.any? %>
