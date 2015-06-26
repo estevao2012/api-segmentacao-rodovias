@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
 	def index
-		@locals   = Rodovia.all.limit(30)
-		@caracteristics = ViaCaracteristic.all
+		@locals   = Rodovia.all.limit(10)
+		# @caracteristics = ViaCaracteristic.all
 	end
 
 	def get_geom_by_br 
